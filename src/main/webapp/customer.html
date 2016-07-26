@@ -1,0 +1,41 @@
+<html xmlns:ng="http://angularjs.org" ng-app="customerApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customer</title>
+<link href="style/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="style/dropdown-menu.css" type="text/css" />
+</head>
+<body>
+	<div class="toppart-admin">
+		<div class="fix-content">
+			<div class="logo">
+				<img src="images/logo.png" />
+			</div>
+			<br /> <br /><br/><br/>
+			<div class="navigation-link">
+				<ul class="dropdown-menu">
+					<li><a href="#admin"></a></li>
+					<li style="background-color:navy;"><a href="#customer">CUSTOMER</a></li>
+					<li style="background-color:navy;"><a href="#product">PRODUCT</a></li>
+					<li style="background-color:navy;"><a href="#order">ORDER</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			
+
+			<div data-ng-view></div>
+
+		</div>
+	</div>
+	<script src="js/angular/jquery-2.1.1.min.js"></script>
+	<script src="js/angular/jquery-ui.min.js"></script>
+	<script src="js/angular/angular.min.js"></script>
+	<script src="js/angular/angular-route.min.js"></script>
+	<script src="js/angular/smart-table.min.js" type="text/javascript"></script>
+
+	<script src="js/app.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/services.js"></script>
+</body>
+</html>

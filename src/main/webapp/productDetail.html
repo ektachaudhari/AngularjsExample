@@ -1,0 +1,52 @@
+<div class="fix-content">
+	<div class="product-listing">
+		<h2>Product</h2>
+		<div class="listingarea">
+
+			<table st-table="data" st-safe-src="productList" width="100%"
+				border="20" cellpadding="0" cellspacing="1"
+				class="table table-striped">
+				<thead>
+
+					<tr>
+						<th align="center">product Id</th>
+						<th align="center">Product Name</th>
+						<th align="center">Price</th>
+						<th align="center">option</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="product in data">
+						<td align="center">{{product.productIdPk}}</td>
+						<td align="center">{{product.productName}}</td>
+						<td align="center">{{product.price}}</td>						
+						<td><input type="button" style="height: 20px; width: 50px" value="Edit" name="edit" id="edit" ng-click="edit(product)" /> 
+							<input type="button" style="height: 20px; width: 50px" value="Delete" name="delete" id="delete" ng-click="remove(product.productIdPk)"/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<form class="htmlForm">
+				<fieldset style="border: 5px solid lightgray; width: 100px">
+					<legend>Product Detail</legend>
+					<br>
+					<table>
+						<tr>
+							<td>Product Name</td>
+							<td><input type="text" ng-model="product.productName" id="name"></td>
+
+							<td>Price</td>
+							<td><input type="text" ng-model="product.price" id="price"></td>							
+						</tr>
+						<tr>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input type="button" value="Add" ng-click="create()">
+								<input type="button" value="Update" ng-click="update()">								
+								<button type="reset" value="Reset" ng-click="reset()">Reset</button></td>
+						</tr>
+					</table>
+				</fieldset>
+			</form>
+		</div>
+	</div>

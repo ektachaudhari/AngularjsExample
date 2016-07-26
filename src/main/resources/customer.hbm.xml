@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.auskeny.hibernate.pojo.Customer"
+		table="customer" >
+		<id name="customerIdPk" type="java.lang.Integer">
+			<column name="customer_id_pk" />
+			<generator class="identity" />
+		</id>
+		<property name="customerName" type="string">
+			<column name="customerName" length="50" not-null="true" />
+		</property>
+		<property name="city" type="string">
+			<column name="city" length="45" not-null="true" />
+		</property>
+		
+		<property name="country" type="string">
+			<column name="country" length="45" not-null="true" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

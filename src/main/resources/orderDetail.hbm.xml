@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.auskeny.hibernate.pojo.OrderDetail" table="order_detail">
+		<id name="orderDetailIdPk" type="java.lang.Integer">
+			<column name="order_detail_id_pk" />
+			<generator class="identity" />
+		</id>
+		
+		<many-to-one name="product"
+			class="com.auskeny.hibernate.pojo.Product" fetch="select">
+			<column name="product_id_fk" not-null="true" />
+		</many-to-one>
+		
+		<many-to-one name="customer"
+			class="com.auskeny.hibernate.pojo.Customer" fetch="select">
+			<column name="customer_id_fk" not-null="true" />
+		</many-to-one>
+		
+		<property name="quantity" type="java.lang.Integer">
+			<column name="quantity" not-null="true" />
+		</property>	
+		
+		<property name="totalPrice" type="double">
+			<column name="total_price" />
+		</property>	
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,60 @@
+<div class="fix-content">
+	<div class="product-listing">
+		<h2>Customer</h2>
+
+		<br />
+
+		<div class="listingarea">
+
+			<table st-table="data" st-safe-src="customerList" width="100%"
+				border="20" cellpadding="0" cellspacing="1"
+				class="table table-striped">
+				<thead>
+
+					<tr>
+						<th align="center">Customer Id</th>
+						<th align="center">Name</th>
+						<th align="center">City</th>
+						<th align="center">Country</th>
+						<th align="center">option</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="customer in data">
+						<td align="center">{{customer.customerIdPk}}</td>
+						<td align="center">{{customer.customerName}}</td>
+						<td align="center">{{customer.city}}</td>
+						<td align="center">{{customer.country}}</td>
+						<td><input type="button" style="height: 20px; width: 50px" value="Edit" name="edit" id="edit" ng-click="edit(customer)" /> 
+							<input type="button" style="height: 20px; width: 50px" value="Delete" name="delete" id="delete" ng-click="remove(customer.customerIdPk)"/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<form class="htmlForm">
+				<fieldset style="border: 5px solid lightgray; width: 100px">
+					<legend>Customer Information</legend>
+					<br>
+					<table>
+						<tr>
+							<td>Name</td>
+							<td><input type="text" ng-model="customer.customerName"	id="name"></td>
+
+							<td>City</td>
+							<td><input type="text" ng-model="customer.city" id="city"></td>
+
+							<td>Country</td>
+							<td><input type="text" ng-model="customer.country" id="country"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input type="button" value="Add" ng-click="create()">
+								<input type="button" value="Update" ng-click="update()">								
+								<button type="reset" value="Reset" ng-click="reset()">Reset</button></td>
+						</tr>
+					</table>
+				</fieldset>
+			</form>
+		</div>
+	</div>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="ISO-8859-1">
+<script src="js/angular/angular.min.js"></script>
+<script>
+	var customerModule = angular.module("myApp", []);
+
+	customerModule
+			.controller(
+					"customerController",
+					function($scope, $rootScope, $http) {
+						$scope.list = [];
+
+						$http.get("rest/read/customer/list").success(
+								function(response) {
+									console.log("response " + response);
+									$scope.list = response;
+								}).error(function(error) {
+							console.log("erro:" + error);
+						});
+
+						$scope.add = function() {
+							$http.post("rest/write/customer/create",
+									$scope.customer).success(
+									function(response) {
+										$scope.list.push(response);
+										$scope.reset();
+									}).error(function(error) {
+								console.log("error: " + error);
+							});
+						};
+
+						$scope.del = function(customerIdPk) {
+
+							$http.get("rest/write/customer/remove/"	+ customerIdPk)
+									.success(function(response) {	
+												for (var i = 0; i < $scope.list.length; i++) {
+													if ($scope.list[i].customerIdPk == customerIdPk) {
+														console.log("splice");
+														$scope.list.splice(i, 1);
+														return;
+													}
+												}
+											});
+
+						};
+
+						$scope.edit = function(customer) {
+							$scope.customer = angular.copy(customer);
+						};
+
+						$scope.update = function() {
+							$http.post("rest/write/customer/update",$scope.customer)
+									.success(
+											function(response) {
+												for (var i = 0; i < $scope.list.length; i++) {
+													if ($scope.list[i].customerIdPk == $scope.customer.customerIdPk) {
+														angular.extend($scope.list[i],response);
+														$scope.reset();
+														break;
+													}
+												}
+												console.log("updated");
+											});
+						}
+
+						$scope.reset = function() {
+						    $scope.customer = {};
+						}
+						
+						/* $scope.clearFields = function() {
+
+							document.getElementById("name").value = "";
+							document.getElementById("city").value = "";
+							document.getElementById("country").value = "";
+						} */
+
+					});
+</script>
+</head>
+<body ng-controller="customerController">
+	<div>
+		<table cellpadding="2" cellspacing="2" border="1" style="width:700px">
+			<thead>
+
+				<tr>
+					<th align="center">Customer Id</th>
+					<th align="center">Name</th>
+					<th align="center">City</th>
+					<th align="center">Country</th>
+					<th align="center">option</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="customer in list">
+					<td align="center">{{customer.customerIdPk}}</td>
+					<td align="center">{{customer.customerName}}</td>
+					<td align="center">{{customer.city}}</td>
+					<td align="center">{{customer.country}}</td>
+					<td><input type="button" style="height: 20px; width: 50px"
+						value="Edit" name="edit" id="edit" ng-click="edit(customer)" /> <input
+						type="button" style="height: 20px; width: 50px" value="Delete"
+						name="delete" id="delete" ng-click="del(customer.customerIdPk)" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<fieldset style="border:5px solid lightgray;width:100px">
+		<legend>Customer Information</legend>
+		<br>
+		<table>
+			<tr>
+				<td>Name</td>
+				<td><input type="text" ng-model="customer.customerName" id="name"></td>
+				
+				<td>City</td>
+				<td><input type="text" ng-model="customer.city" id="city"></td>
+				
+				<td>Country</td>
+				<td><input type="text" ng-model="customer.country" id="country"></td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td><input type="button" value="Add" ng-click="add()">
+					<input type="button" value="Update" ng-click="update()"> <!-- <input type="reset" value="Reset"> -->
+					<button type="reset" value="Reset" ng-click="reset()">Reset</button></td>
+			</tr>
+		</table>
+	</fieldset>
+
+</body>
+</html>
